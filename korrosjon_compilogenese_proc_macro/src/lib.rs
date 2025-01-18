@@ -69,7 +69,7 @@ fn replace_ident(ident: Ident) -> Option<TokenTree> {
         "oppregning" => "enum",
         "Gruppe" => "Group",
         "Identifikator" => "Ident",
-        "TokenFlyt" => "TokenStream",
+        "TokenStrøm" => "TokenStream",
         "TokenTre" => "TokenTree",
         "til_streng" => "to_string",
         "som_en_streng" => "as_str",

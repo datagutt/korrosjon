@@ -1,5 +1,5 @@
 korrosjon_compilogenese::korrosjon! {
-    bruk prosedyremakro::{Gruppe, Identifikator, TokenFlyt, TokenTre};
+    bruk prosedyremakro::{Gruppe, Identifikator, TokenStrøm, TokenTre};
 
     funksjon erstatt_identifikator(identifikator: Identifikator) -> Kanskje<TokenTre> {
         la strenge_identifikator = identifikator.til_streng();
@@ -70,13 +70,13 @@ korrosjon_compilogenese::korrosjon! {
             "oppregning" => "enum",
             "Gruppe" => "Group",
             "Identifikator" => "Ident",
-            "TokenFlyt" => "TokenStream",
+            "TokenStrøm" => "TokenStream",
             "TokenTre" => "TokenTree",
             "til_streng" => "to_string",
             "som_en_streng" => "as_str",
             "omfang" => "span",
             "Vektor" => "Vec",
-            "flyt" => "stream",
+            "strøm" => "stream",
             "dytt" => "push",
             "utvid" => "extend",
             "skilletegn" => "delimiter",
@@ -94,10 +94,10 @@ korrosjon_compilogenese::korrosjon! {
         sammenlign tre {
             TokenTre::Gruppe(gruppe) => {
                 la foranderlig gruppe_elementer  = Vektor::ny();
-                erstatt_flyten(gruppe.stream(), &foranderlig gruppe_elementer);
-                la foranderlig ny_flyt = TokenFlyt::ny();
-                ny_flyt.utvid(gruppe_elementer);
-                ut.dytt(TokenTre::Gruppe(Gruppe::ny(gruppe.skilletegn(), ny_flyt)));
+                erstatt_strømmen(gruppe.strøm(), &foranderlig gruppe_elementer);
+                la foranderlig ny_strøm = TokenStrøm::ny();
+                ny_strøm.utvid(gruppe_elementer);
+                ut.dytt(TokenTre::Gruppe(Gruppe::ny(gruppe.skilletegn(), ny_strøm)));
             }
             TokenTre::Identifikator(identifikator) => {
                 hvis la Noen(identifikator) = erstatt_identifikator(identifikator) {
@@ -110,17 +110,17 @@ korrosjon_compilogenese::korrosjon! {
         }
     }
 
-    funksjon erstatt_flyten(token_tre: TokenFlyt, ut: &foranderlig Vektor<TokenTre>) {
+    funksjon erstatt_strømmen(token_tre: TokenStrøm, ut: &foranderlig Vektor<TokenTre>) {
         for token av token_tre {
             erstatt_tre(token, ut)
         }
     }
 
     #[prosedyremakro]
-    offentlig funksjon korrosjon(element: TokenFlyt) -> TokenFlyt {
+    offentlig funksjon korrosjon(element: TokenStrøm) -> TokenStrøm {
         la foranderlig returnerte = Vektor::ny();
-        erstatt_flyten(element, &foranderlig returnerte);
-        la foranderlig ut = TokenFlyt::ny();
+        erstatt_strømmen(element, &foranderlig returnerte);
+        la foranderlig ut = TokenStrøm::ny();
         ut.utvid(returnerte);
         ut
     }
