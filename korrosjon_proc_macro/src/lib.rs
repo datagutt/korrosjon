@@ -73,7 +73,7 @@ korrosjon_compilogenese::korrosjon! {
             "TokenStrøm" => "TokenStream",
             "TokenTre" => "TokenTree",
             "til_streng" => "to_string",
-            "som_en_streng" => "as_str",
+            "som_en_str" => "as_str",
             "omfang" => "span",
             "Vektor" => "Vec",
             "strøm" => "stream",
