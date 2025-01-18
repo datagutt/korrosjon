@@ -10,8 +10,6 @@ Worried about being stuck with only Norwegian words, especially if you’re from
 
 No worries! Norwegian Rust is fully compatible with English Rust, so you can mix both languages as you please.
 
-Here's an example of what can be achieved with Rouille:
-
 Below is an example showcasing what is possible with korrosjon:
 
 ### trait og impl (aka egenskap og implementasjon)
