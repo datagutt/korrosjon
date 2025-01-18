@@ -14,7 +14,7 @@ Here's an example of what can be achieved with Rouille:
 
 Below is an example showcasing what is possible with korrosjon:
 
-### egenskap og impl (aka egenskap og implementasjon)
+### trait og impl (aka egenskap og implementasjon)
 
 ```rust
 korrosjon::korrosjon! {
