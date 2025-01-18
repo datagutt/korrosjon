@@ -1,15 +1,15 @@
-name: Rouille
+name: Korrosjon
 
 on:
   push:
-    branches: [ principale ]
+    branches: [hoved]
   pull_request:
-    branches: [ principale ]
+    branches: [hoved]
 
 jobs:
   ic:
     env:
-        RUST_BACKTRACE: 1
+      RUST_BACKTRACE: 1
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,7 +26,7 @@ jobs:
           toolchain: ${{ matrix.rust }}
           override: true
 
-      - name: Lancer les exemples
+      - name: Start eksemplene
         uses: actions-rs/cargo@v1
         with:
           command: run
