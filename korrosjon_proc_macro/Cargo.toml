@@ -1,0 +1,10 @@
+[package]
+name = "korrosjon"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+korrosjon_compilogenese = { path = "../korrosjon_compilogenese_proc_macro" }
+
+[lib]
+proc-macro = true

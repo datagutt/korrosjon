@@ -1,85 +1,87 @@
-rouille::rouille! {
-    externe cagette rouille;
+korrosjon::korrosjon! {
+    ekstern eske korrosjon;
 
-    utilisons std::collections::Dictionnaire comme Dico;
+    bruk std::collections::Ordbok som Ordbok;
 
-    convention CléValeur {
-        fonction écrire(&soi, clé: Chaîne, valeur: Chaîne);
-        fonction lire(&soi, clé: Chaîne) -> Résultat<PeutÊtre<&Chaîne>, Chaîne>;
+    egenskap Nøkkelverdi {
+        funksjon skriv(&selv, nøkkel: Streng, verdi: Streng);
+        funksjon les(&selv, nøkkel: Streng) -> Resultat<Kanskje<&Streng>, Streng>;
     }
 
-    statique mutable DICTIONNAIRE: PeutÊtre<Dico<Chaîne, Chaîne>> = Rien;
+    statisk foranderlig ORDBOK: Kanskje<Ordbok<Streng, Streng>> = Ingenting;
 
-    structure Concrète;
+    struktur Konkret;
 
-    réalisation CléValeur pour Concrète {
-        fonction écrire(&soi, clé: Chaîne, valeur: Chaîne) {
-            soit dico = dangereux {
-                DICTIONNAIRE.prendre_ou_insérer_avec(Défaut::défaut)
+    implementer Nøkkelverdi for Konkret {
+        funksjon skriv(&selv, nøkkel: Streng, verdi: Streng) {
+            la ordbok = utrygt {
+                ORDBOK.ta_eller_sett_inn_med(Standard::standard)
             };
-            dico.insérer(clé, valeur);
+            ordbok.sett_inn(nøkkel, verdi);
         }
-        fonction lire(&soi, clé: Chaîne) -> Résultat<PeutÊtre<&Chaîne>, Chaîne> {
-            si soit Quelque(dico) = dangereux { DICTIONNAIRE.en_réf() } {
-                Bien(dico.lire(&clé))
-            } sinon {
-                Arf("fetchez le dico".vers())
+        funksjon les(&selv, nøkkel: Streng) -> Resultat<Kanskje<&Streng>, Streng> {
+            hvis la Noen(ordbok) = utrygt { ORDBOK.som_ref() } {
+                Bra(ordbok.les(&nøkkel))
+            } ellers {
+                Prob("henting av ordbok".til())
             }
         }
     }
 
-    public(cagette) fonction peut_etre(i: u32) -> PeutÊtre<Résultat<u32, Chaîne>> {
-        si i % 2 == 1 {
-            si i == 42 {
-                Quelque(Arf(Chaîne::depuis("merde")))
-            } sinon {
-                Quelque(Bien(33))
+    offentlig(eske) funksjon kanskje(i: u32) -> Kanskje<Resultat<u32, Streng>> {
+        hvis i % 2 == 1 {
+            hvis i == 42 {
+                Noen(Prob(Streng::fra("merav")))
+            } ellers {
+                Noen(Bra(33))
             }
-        } sinon {
-            Rien
+        } ellers {
+            Ingenting
         }
     }
 
-    asynchrone fonction exemple() {
+    asynkron funksjon eksempel() {
     }
 
-    asynchrone fonction exemple2() {
-        exemple().attend;
+    asynkron funksjon eksempel2() {
+        eksempel().avvent;
     }
 
-    fonction principale() {
-        soit mutable x = 31;
+    funksjon hoved() {
+        la foranderlig x = 31;
 
-        selon x {
+        sammenlign x {
             42 => {
-                affiche!("omelette du fromage")
+                skrivlinje!("vaffel med brunost")
             }
-            _ => affiche!("voila")
+            _ => skrivlinje!("jepsipepsi")
         }
 
-        pour i de 0..10 {
-            soit val = boucle {
-                arrête i;
+        for i av 0..10 {
+            la verdi = løkke {
+                bryt i;
             };
 
-            tant que x < val {
+            imens ingen x < verdi {
                 x += 1;
             }
 
-            x = si soit Quelque(resultat) = peut_etre(i) {
-                resultat.déballer()
-            } sinon {
+            x = hvis la Noen(resultat) = kanskje(i) {
+                resultat.pakk_opp()
+            } ellers {
                 12
             };
         }
 
-        //secondaire();
+        sekundær();
     }
 
-    #[légal(code_inaccessible)]
-    fonction secondaire() {
-        merde!("oh non"); // for the true French experience
-        calisse!("tabernacle"); // for friends speaking fr-ca
-        oups!("fetchez la vache"); // in SFW contexts
+    #[tillat(uoppnåelig_kode)]
+    funksjon sekundær() {
+        panikk!("å nei");
+        dritt!("drittkoav");
+        faen!("fy faen");
+        ops!("ops, avtte gikk galt");
+        uff!("uff, avtte var ikke bra");
     }
 }
