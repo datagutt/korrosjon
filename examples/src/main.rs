@@ -73,7 +73,7 @@ korrosjon::korrosjon! {
             };
         }
 
-        sekundær();
+        //sekundær();
     }
 
     #[tillat(uoppnåelig_kode)]
