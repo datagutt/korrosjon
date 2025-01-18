@@ -81,7 +81,7 @@ korrosjon::korrosjon! {
         panikk!("å nei");
         dritt!("drittkoav");
         faen!("fy faen");
-        ops!("ops, avtte gikk galt");
-        uff!("uff, avtte var ikke bra");
+        ops!("ops, dette gikk galt");
+        uff!("uff, dette var ikke bra");
     }
 }
