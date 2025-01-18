@@ -90,29 +90,29 @@ korrosjon_compilogenese::korrosjon! {
         Noen(TokenTre::Identifikator(ny_identifikator))
     }
 
-    funksjon erstatt_tre(tre: TokenTre, sortering: &foranderlig Vektor<TokenTre>) {
+    funksjon erstatt_tre(tre: TokenTre, ut: &foranderlig Vektor<TokenTre>) {
         sammenlign tre {
             TokenTre::Gruppe(gruppe) => {
                 la foranderlig gruppe_elementer  = Vektor::ny();
                 erstatt_flyten(gruppe.stream(), &foranderlig gruppe_elementer);
                 la foranderlig ny_flyt = TokenFlyt::ny();
                 ny_flyt.utvid(gruppe_elementer);
-                sortering.dytt(TokenTre::Gruppe(Gruppe::ny(gruppe.skilletegn(), ny_flyt)));
+                ut.dytt(TokenTre::Gruppe(Gruppe::ny(gruppe.skilletegn(), ny_flyt)));
             }
             TokenTre::Identifikator(identifikator) => {
                 hvis la Noen(identifikator) = erstatt_identifikator(identifikator) {
-                    sortering.dytt(identifikator);
+                    ut.dytt(identifikator);
                 }
             }
             TokenTre::Tegnsetting(..) | TokenTre::Bokstavelig(..) => {
-                sortering.dytt(tre);
+                ut.dytt(tre);
             }
         }
     }
 
-    funksjon erstatt_flyten(token_tre: TokenFlyt, sortering: &foranderlig Vektor<TokenTre>) {
+    funksjon erstatt_flyten(token_tre: TokenFlyt, ut: &foranderlig Vektor<TokenTre>) {
         for token av token_tre {
-            erstatt_tre(token, sortering)
+            erstatt_tre(token, ut)
         }
     }
 
@@ -120,8 +120,8 @@ korrosjon_compilogenese::korrosjon! {
     offentlig funksjon korrosjon(element: TokenFlyt) -> TokenFlyt {
         la foranderlig returnerte = Vektor::ny();
         erstatt_flyten(element, &foranderlig returnerte);
-        la foranderlig sortering = TokenFlyt::ny();
-        sortering.utvid(returnerte);
-        sortering
+        la foranderlig ut = TokenFlyt::ny();
+        ut.utvid(returnerte);
+        ut
     }
 }
