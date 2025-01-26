@@ -4,7 +4,7 @@ korrosjon_compilogenese::korrosjon! {
     funksjon erstatt_identifikator(identifikator: Identifikator) -> Kanskje<TokenTre> {
         la strenge_identifikator = identifikator.til_streng();
 
-        la ny_streng = sammenlign strenge_identifikator.som_en_streng() {
+        la ny_streng = sammenlign strenge_identifikator.som_en_str() {
             "Prob" => "Err",
             "Bra" => "Ok",
             "Streng" => "String",
